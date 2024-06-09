@@ -6,6 +6,7 @@ class VacancySaver(ABC):
     """Abstract class for saving data"""
     @abstractmethod
     def __init__(self):
+        self.is_added = False
         pass
 
     @abstractmethod
@@ -31,10 +32,11 @@ class JSONSaver(VacancySaver):
             for i in data['Vacancies']:
                 if i == vacancy.__dict__:
                     print('Vacancy already added')
-                    break
-            data['Vacancies'].append(vacancy.__dict__)
-            with open('data/vacancies_from_HH.json', 'w', encoding='utf-8') as outfile:
-                json.dump(data, outfile, ensure_ascii=False, indent=2)
+                    self.is_added = True
+            if not self.is_added:
+                data['Vacancies'].append(vacancy.__dict__)
+                with open('data/vacancies_from_HH.json', 'w', encoding='utf-8') as outfile:
+                    json.dump(data, outfile, ensure_ascii=False, indent=2)
 
     def delete_vacancy(self, vacancy):
         pass
