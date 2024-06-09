@@ -1,4 +1,3 @@
-import json
 from abc import ABC, abstractmethod
 import requests
 
@@ -24,7 +23,7 @@ class HH(Parser):
         self.params = {'area': self.area, 'text': ''}
 
     def load_vacancies(self, keyword=''):
+        """returns list with vacancies"""
         self.params['text'] = keyword  # adding keyword to url
         response = requests.get(self.url, params=self.params).json()['items']
-        with open('data/vacancies.json', 'w', encoding='utf-8') as file:
-            json.dump(response, file, ensure_ascii=False, indent=4)
+        return response
