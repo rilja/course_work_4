@@ -38,8 +38,33 @@ class Vacancy(BaseVacancy):
     @staticmethod
     def get_vacancies_by_salary(vacancies: list, salary_range: str):
         salary_range = salary_range.split(' - ')
+        lower_range = int(salary_range[0])
+        upper_range = int(salary_range[1])
         filtered_vacancies = []
         for i in vacancies:
-            if salary_range[1] >= i.get('salary').get('from') >= salary_range[0] or salary_range[1] >= i.get('salary').get('to') >= salary_range[0]:
-                filtered_vacancies.append(i)
+            if i.salary:
+                if i.salary.get('from'):
+                    if upper_range >= i.salary.get('from') >= lower_range:
+                        filtered_vacancies.append(i)
         return filtered_vacancies
+
+    @staticmethod
+    def get_top_vacancies(vacancies: list, top: int):
+        filtered_vacancies = []
+        salary_list = []
+        for i in vacancies:
+            if i.salary:
+                if i.salary.get('from'):
+                    salary_list.append(i.salary.get('from'))
+        salary_list.sort(reverse=True)
+        for salary in salary_list:
+            for i in vacancies:
+                if i.salary:
+                    if i.salary.get('from') == salary:
+                        filtered_vacancies.append(i)
+        return filtered_vacancies[0:top]
+
+
+
+
+
