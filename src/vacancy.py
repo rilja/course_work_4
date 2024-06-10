@@ -23,6 +23,8 @@ class Vacancy(BaseVacancy):
 
     @classmethod
     def cast_to_object_list(cls, data):
+        """"convert json data in list of class Vacancy objects"""
+
         vacancies = []
         for i in data:
             vacancy = cls(i.get('id'),
@@ -37,6 +39,8 @@ class Vacancy(BaseVacancy):
 
     @staticmethod
     def get_vacancies_by_salary(vacancies: list, salary_range: str):
+        """staticmethod for user, to choose salary range"""
+
         salary_range = salary_range.split(' - ')
         lower_range = int(salary_range[0])
         upper_range = int(salary_range[1])
@@ -50,6 +54,8 @@ class Vacancy(BaseVacancy):
 
     @staticmethod
     def get_top_vacancies(vacancies: list, top: int):
+        """staticmethod for user, to see top of vacancies"""
+
         filtered_vacancies = []
         salary_list = []
         for i in vacancies:

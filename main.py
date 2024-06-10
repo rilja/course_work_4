@@ -28,8 +28,8 @@ def user_interaction():
 
     ranged_vacancies = Vacancy.get_vacancies_by_salary(vacancies_list, salary_range)
     top_vacancies = Vacancy.get_top_vacancies(ranged_vacancies, top_n)
-    print(top_vacancies)
+    print(top_vacancies)  # print result
+
 
 if __name__ == "__main__":
     user_interaction()
-

@@ -19,10 +19,13 @@ class VacancySaver(ABC):
 
 
 class JSONSaver(VacancySaver):
+    """class for saving data in json file"""
     def __init__(self):
         super().__init__()
 
     def add_vacancy(self, vacancy):
+        """adds vacancy to the file"""
+
         with open('data/vacancies_from_HH.json', encoding='utf-8') as file:
             data = json.load(file)
             for i in data['Vacancies']:
@@ -34,6 +37,8 @@ class JSONSaver(VacancySaver):
                     json.dump(data, outfile, ensure_ascii=False, indent=2)
 
     def delete_vacancy(self, vacancy):
+        """"delete vacancy from the file"""
+
         try:
             with open('data/vacancies_from_HH.json', encoding='utf-8') as file:
                 data = json.load(file)

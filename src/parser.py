@@ -18,7 +18,7 @@ class HH(Parser):
 
     def __init__(self):
         self.area = 113  # Russia by default
-        self.url = 'https://api.hh.ru/vacancies'
+        self.url = 'https://api.hh.ru/vacancies'  # basic url
         self.vacancies = []
         self.params = {'area': self.area, 'text': ''}
 
