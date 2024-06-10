@@ -8,7 +8,7 @@ class BaseVacancy(ABC):
         self.id = identification
         self.name = name
         self.url = url
-        self.salary = salary
+        self.salary = salary if salary else 0
         self.description = description
         self.requirements = requirements
 
@@ -34,3 +34,12 @@ class Vacancy(BaseVacancy):
             vacancies.append(vacancy)
 
         return vacancies
+
+    @staticmethod
+    def get_vacancies_by_salary(vacancies: list, salary_range: str):
+        salary_range = salary_range.split(' - ')
+        filtered_vacancies = []
+        for i in vacancies:
+            if salary_range[1] >= i.get('salary').get('from') >= salary_range[0] or salary_range[1] >= i.get('salary').get('to') >= salary_range[0]:
+                filtered_vacancies.append(i)
+        return filtered_vacancies
