@@ -62,7 +62,23 @@ class Vacancy(BaseVacancy):
                 if i.salary:
                     if i.salary.get('from') == salary:
                         filtered_vacancies.append(i)
+                        vacancies.remove(i)
+
         return filtered_vacancies[0:top]
+
+    def __repr__(self):
+        return f'''\n{self.__class__.__name__}
+("{self.id}", "{self.name}",  "{self.url}", "{self.salary}", "{self.description}", "{self.requirements}")'''
+
+    def __str__(self):
+        return f'''
+"id": "{self.id}",
+"name": "{self.name}",
+"url": "{self.url}",
+"salary": {self.salary},
+"description": {self.description},
+"requirements": {self.requirements}
+'''
 
 
 
