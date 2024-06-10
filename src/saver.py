@@ -39,7 +39,14 @@ class JSONSaver(VacancySaver):
                     json.dump(data, outfile, ensure_ascii=False, indent=2)
 
     def delete_vacancy(self, vacancy):
-        pass
+        try:
+            with open('data/vacancies_from_HH.json', encoding='utf-8') as file:
+                data = json.load(file)
+                data['Vacancies'].remove(vacancy.__dict__)
+                with open('data/vacancies_from_HH.json', 'w', encoding='utf-8') as outfile:
+                    json.dump(data, outfile, ensure_ascii=False, indent=2)
+        except ValueError:
+            print('No such vacancy in the file')
 
     def choose_vacancy(self, keyword='all', salary_range='', top_count=10):
         pass
